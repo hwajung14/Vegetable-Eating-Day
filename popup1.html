@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Complete</title>
+    <style>
+        body {
+            background-color: rgba(255, 255, 255, 0.56);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        button a {
+            text-decoration: none;
+        }
+
+        @import url('https://fonts.googleapis.com/css?family=Rubik:700&display=swap');
+
+        :root {
+            --text: #fff;
+            --light-pink: #ff69b4;
+            --pink-border: #ff1493;
+            --dark-pink: #c71585;
+            --pink-shadow: rgba(75, 5, 42, 0.4);
+            --pink: #ff1493;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 150px;
+            height: 50px;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            outline: none;
+            border: 0;
+            vertical-align: middle;
+            text-decoration: none;
+            font-size: inherit;
+            font-family: inherit;
+            margin-top: 10px;
+        }
+
+        button.learn-more {
+            font-weight: 600;
+            color: var(--text);
+            text-transform: uppercase;
+            padding: 0.5em 2em;
+            background: var(--light-pink);
+            border: 2px solid var(--pink-border);
+            border-radius: 0.75em;
+            transform-style: preserve-3d;
+            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+        }
+
+        button.learn-more::before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--dark-pink);
+            border-radius: inherit;
+            box-shadow: 0 0 0 2px var(--pink-border), 0 0.625em 0 0 var(--pink-shadow);
+            transform: translate3d(0, 0.75em, -1em);
+            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+        }
+
+        button.learn-more:hover {
+            background: var(--pink);
+            transform: translate(0, 0.25em);
+        }
+
+        button.learn-more:hover::before {
+            box-shadow: 0 0 0 2px var(--pink-border), 0 0.5em 0 0 var(--pink-shadow);
+            transform: translate3d(0, 0.5em, -1em);
+        }
+
+        button.learn-more:active {
+            background: var(--pink);
+            transform: translate(0em, 0.75em);
+        }
+
+        button.learn-more:active::before {
+            box-shadow: 0 0 0 2px var(--pink-border), 0 0 var(--pink-shadow);
+            transform: translate3d(0, 0, -1em);
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        img {
+            animation: fadeInScale 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<audio src="img/pop up.mp3" autoplay></audio>
+<div class="button-container">
+    <img src="img/s1.png" width="250px">
+    <a href="level2.html"><button class="learn-more">다음 단계</button></a>
+    <a href="level1.html"><button class="learn-more">다시하기</button></a>
+    <a href="level.html"><button class="learn-more">홈으로</button></a>
+</div>
+</body>
+</html>

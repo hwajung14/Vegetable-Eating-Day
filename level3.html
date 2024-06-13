@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>6 x 5</title>
+    <style>
+        :root {
+            --text: #fff;
+            --light-pink: #ff69b4;
+            --pink-border: #ff1493;
+            --dark-pink: #c71585;
+            --pink-shadow: rgba(75, 5, 42, 0.4);
+            --pink: #ff1493;
+        }
+        body {
+            background-image: url("./img/bc.jpg");
+            display: flex;
+            justify-content: center;
+        }
+        main {
+            display: flex;
+            margin-top: 35px;
+            width: 1050px;
+        }
+        #wrapper {
+            width: 800px;
+            height: 500px;
+        }
+        .card {
+            display: inline-block;
+            margin-right: 25px;
+            margin-bottom: 33px;
+            width: 100px;
+            height: 134px;
+            perspective: 140px;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            background-image: url(./img/c2.png);
+        }
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-back {
+            background-image: url(./img/bg.jpg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-size: cover;
+        }
+        .card-front {
+            transform: rotateY(180deg);
+        }
+        aside {
+            margin-left: 30px;
+            position: relative;
+            width: 250px;
+        }
+        aside img {
+            width: 230px;
+            display: block;
+            margin-top: -188px;
+            visibility: hidden;
+        }
+        aside img:first-child {
+            margin-top: 0;
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        button {
+            width: 100px;
+            height: 60px;
+            cursor: pointer;
+            outline: none;
+            border: 0;
+            vertical-align: middle;
+            text-decoration: none;
+            font-size: inherit;
+            font-family: inherit;
+            margin-bottom: 20px;
+        }
+
+        button.learn-more {
+            font-weight: 600;
+            color: var(--text);
+            text-transform: uppercase;
+            padding: 0.01em 2em;
+            background: var(--light-pink);
+            border: 2px solid var(--pink-border);
+            border-radius: 0.75em;
+            transform-style: preserve-3d;
+            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+        }
+
+        button.learn-more::before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--dark-pink);
+            border-radius: inherit;
+            box-shadow: 0 0 0 2px var(--pink-border), 0 0.625em 0 0 var(--pink-shadow);
+            transform: translate3d(0, 0.75em, -1em);
+            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+        }
+
+        button.learn-more:hover {
+            background: var(--pink);
+            transform: translate(0, 0.25em);
+        }
+
+        button.learn-more:hover::before {
+            box-shadow: 0 0 0 2px var(--pink-border), 0 0.5em 0 0 var(--pink-shadow);
+            transform: translate3d(0, 0.5em, -1em);
+        }
+
+        button.learn-more:active {
+            background: var(--pink);
+            transform: translate(0em, 0.75em);
+        }
+
+        button.learn-more:active::before {
+            box-shadow: 0 0 0 2px var(--pink-border), 0 0 var(--pink-shadow);
+            transform: translate3d(0, 0, -1em);
+        }
+        .audio-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .audio-controls button {
+            width: 100px;
+            height: 40px;
+        }
+        .audio-controls input {
+            width: 100px;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        .card.shake {
+            animation: shake 0.5s;
+        }
+
+    </style>
+</head>
+<body>
+<main>
+    <div id="wrapper"></div>
+    <aside>
+        <img src="img/2.png" alt="">
+        <img src="img/1.png" alt="">
+        <img src="img/4.png" alt="">
+        <img src="img/3.png" alt="">
+        <img src="img/8.png" alt="">
+        <img src="img/5.png" alt="">
+        <img src="img/6.png" alt="">
+        <img src="img/9.png" alt="">
+        <img src="img/7.png" alt="">
+        <img src="img/10.png" alt="">
+        <img src="img/11.png" alt="">
+        <img src="img/12.png" alt="">
+        <img src="img/13.png" alt="">
+        <img src="img/14.png" alt="">
+        <img src="img/2.png" alt="">
+    </aside>
+    <audio id="pop-sound">
+        <source src="img/pop.mp3">
+    </audio>
+    <audio id="flip-sound">
+        <source src="img/flip.mp3">
+    </audio>
+    <div class="controls">
+        <a href="level1.html"><button class="learn-more">다시하기</button></a>
+        <a href="level.html"><button class="learn-more">홈</button></a>
+        <audio id="bgm" autoplay loop>
+            <source src="img/level1.mp3">
+        </audio>
+        <div class="audio-controls">
+            <label for="volume"></label>
+            <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+        </div>
+    </div>
+    <audio id="wrong-sound">
+        <source src="img/wrong.mp3">
+    </audio>
+</main>
+
+<script>
+    const $wrapper = document.querySelector('#wrapper');
+    const total = 30;
+    const images = [
+        'img/c2.png',
+        'img/c2.png',
+        'img/c3.png',
+        'img/c5.png',
+        'img/c4.png',
+        'img/c6.png',
+        'img/c1.png',
+        'img/c7.png',
+        'img/c10.png',
+        'img/c9.png',
+        'img/c11.png',
+        'img/c8.png',
+        'img/c12.png',
+        'img/c13.png',
+        'img/c14.png'
+    ];
+    let imageCopy = images.concat(images); // 이미지 복사
+    let shuffled = []; // 섞은 이미지 배열
+    let clicked = []; // 클릭한 카드 배열
+    let completed = [];
+    let clickable = false;
+    let c2MatchCount = 0;
+
+    const popSound = document.getElementById('pop-sound');
+    const flipSound = document.getElementById('flip-sound');
+    const bgm = document.getElementById('bgm');
+    const volumeControl = document.getElementById('volume');
+    const wrongSound = document.getElementById('wrong-sound');
+
+    volumeControl.addEventListener('input', () => {
+        bgm.volume = volumeControl.value;
+    });
+
+
+    function onClickCard() {
+        if (!clickable || completed.includes(this) || clicked[0] === this) {
+            return;
+        }
+        this.classList.toggle('flipped');
+        flipSound.play();
+
+        clicked.push(this);
+        if (clicked.length !== 2) {
+            return;
+        }
+        const front1Image = clicked[0].querySelector('.card-front').style.backgroundImage;
+        const front2Image = clicked[1].querySelector('.card-front').style.backgroundImage;
+        if (front1Image === front2Image) {
+            completed.push(clicked[0]);
+            completed.push(clicked[1]);
+
+            if (front1Image.includes('c2.png')) {
+                c2MatchCount++;
+                popSound.play();
+                const c2Images = document.querySelectorAll('aside img[src="img/2.png"]');
+                if (c2MatchCount <= c2Images.length) {
+                    c2Images[c2MatchCount - 1].style.visibility = 'visible';
+                    popSound.play();
+                }
+            }
+            if (front1Image.includes('c1.png')) {
+                document.querySelector('aside img[src="img/1.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c3.png')) {
+                document.querySelector('aside img[src="img/3.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c8.png')) {
+                document.querySelector('aside img[src="img/8.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c4.png')) {
+                document.querySelector('aside img[src="img/4.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c5.png')) {
+                document.querySelector('aside img[src="img/5.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c6.png')) {
+                document.querySelector('aside img[src="img/6.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c7.png')) {
+                document.querySelector('aside img[src="img/7.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c9.png')) {
+                document.querySelector('aside img[src="img/9.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c10.png')) {
+                document.querySelector('aside img[src="img/10.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c11.png')) {
+                document.querySelector('aside img[src="img/11.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c12.png')) {
+                document.querySelector('aside img[src="img/12.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c13.png')) {
+                document.querySelector('aside img[src="img/13.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+            if (front1Image.includes('c14.png')) {
+                document.querySelector('aside img[src="img/14.png"]').style.visibility = 'visible';
+                popSound.play();
+            }
+
+            clicked = [];
+            if (completed.length !== total) {
+                return;
+            }
+            setTimeout(() => {
+                bgm.pause();
+                window.open('popup3.html')
+            }, 1000);
+            return;
+        }
+        // 두 카드의 이미지가 다르면
+        setTimeout(() => {
+            clicked[0].classList.add('shake');
+            clicked[1].classList.add('shake');
+            wrongSound.play();
+        }, 500);
+
+        setTimeout(() => {
+            clicked[0].classList.remove('flipped', 'shake');
+            clicked[1].classList.remove('flipped', 'shake');
+            clicked = [];
+        }, 1000);
+    }
+    function resetGame() {
+        $wrapper.innerHTML = '';
+        imageCopy = images.concat(images);
+        shuffled = [];
+        completed = [];
+        clickable = false;
+        c2MatchCount = 0;
+        startGame();
+    }
+    function shuffle() {
+        for (; imageCopy.length > 0;) {
+            const randomIndex = Math.floor(Math.random() * imageCopy.length);
+            shuffled = shuffled.concat(imageCopy.splice(randomIndex, 1));
+        }
+    }
+    function createCard(i) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
+        const cardBack = document.createElement('div');
+        cardBack.className = 'card-back';
+        const cardFront = document.createElement('div');
+        cardFront.className = 'card-front';
+        cardFront.style.backgroundImage = `url(${shuffled[i]})`;
+        cardInner.appendChild(cardBack);
+        cardInner.appendChild(cardFront);
+        card.appendChild(cardInner);
+        return card;
+    }
+    function startGame() {
+        shuffle();
+        for (let i = 0; i < total; i += 1) {
+            const card = createCard(i);
+            card.addEventListener('click', onClickCard);
+            $wrapper.appendChild(card);
+        }
+        document.querySelectorAll('.card').forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('flipped');
+            }, 1000 + 100 * index);
+        });
+        setTimeout(() => {
+            document.querySelectorAll('.card').forEach((card) => {
+                card.classList.remove('flipped');
+            });
+            clickable = true;
+        }, 5000);
+    }
+    startGame();
+</script>
+</body>
+</html>
